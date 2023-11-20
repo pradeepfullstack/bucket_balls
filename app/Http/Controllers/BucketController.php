@@ -22,8 +22,11 @@ class BucketController extends Controller
             'name' => $request->name,
             'capacity' => $request->capacity,
         ]);
-        $this->emptyAllBuckets(); // Empty all buckets after creating a new bucket
+
+        $this->emptyAllBuckets();
+        
         Log::info($bucket);
+
         return redirect()->route('welcome')->with(['message' => 'Bucket created successfully', 'bucket' => $bucket]);
     }
 
@@ -41,13 +44,11 @@ class BucketController extends Controller
 
     public function suggestBuckets(Request $request)
     {
-        // Validate input
         $request->validate([
             'red_balls' => 'required|integer',
             'blue_balls' => 'required|integer',
         ]);
 
-        // Calculate total size of balls
         $totalSize = ($request->red_balls * 5) + ($request->blue_balls * 3);
 
         // Get all buckets and calculate their remaining empty volumes
@@ -72,7 +73,6 @@ class BucketController extends Controller
             $remainingTotalVolume -= $remainingEmptyVolumes[$bucket->id];
         }
 
-        // Return the suggestion
         return response()->json(['message' => 'Suggestion:', 'min_buckets' => $minBuckets]);
     }
 }

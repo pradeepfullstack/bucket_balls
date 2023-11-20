@@ -409,7 +409,6 @@
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0">
         <div class="container mt-5">
             <div class="row">
-                <!-- Form for submitting balls -->
                 <div class="col-md-6 mb-3">
                     <div class="border p-3">
                         <h4 class="mb-3">Create Ball</h4>
@@ -429,7 +428,6 @@
                         </form>
                     </div>
                 </div>
-                <!-- Form for submitting a bucket -->
                 <div class="col-md-6 mb-3">
                     <div class="border p-3">
                         <h4 class="mb-3">Create Bucket</h4>
@@ -455,7 +453,6 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <div class="border p-3">
-                    <!-- Right Section: Suggested Buckets -->
                     <h4 class="mb-3">Place Balls in Bucket</h4>
                     <form action="{{ route('balls.store') }}" method="post">
                         @csrf
@@ -471,7 +468,6 @@
                     </form>
                     </div>
                     </div>
-                    <!-- Left Section: List of Balls -->
                     <div class="col-md-6 mb-3">
                         <div class="border p-3">
                             <h4 class="mb-3">List of Balls</h4>
