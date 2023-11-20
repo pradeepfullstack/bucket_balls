@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bucket;
 use App\Models\Ball;
+use Illuminate\Support\Facades\Log;
 
 class BucketController extends Controller
 {
     public function create(Request $request)
     {
+        Log::info($request);
+
         $request->validate([
             'name' => 'required|string',
             'capacity' => 'required|integer',
@@ -19,10 +22,9 @@ class BucketController extends Controller
             'name' => $request->name,
             'capacity' => $request->capacity,
         ]);
-
-        $this->emptyAllBuckets();
-
-        return response()->json(['message' => 'Bucket created successfully', 'bucket' => $bucket], 201);
+        $this->emptyAllBuckets(); // Empty all buckets after creating a new bucket
+        Log::info($bucket);
+        return redirect()->route('welcome')->with(['message' => 'Bucket created successfully', 'bucket' => $bucket]);
     }
 
     public function getBuckets()
@@ -34,7 +36,7 @@ class BucketController extends Controller
 
     private function emptyAllBuckets()
     {
-        Ball::truncate(); // Deletes all rows in the balls table
+        Ball::query()->delete();
     }
 
     public function suggestBuckets(Request $request)

@@ -15,10 +15,8 @@ class CreateBallsTable extends Migration
     {
         Schema::create('balls', function (Blueprint $table) {
             $table->id();
-            $table->string('color');
+            $table->string('name');
             $table->integer('size');
-            $table->unsignedBigInteger('bucket_id');
-            $table->foreign('bucket_id')->references('id')->on('buckets')->onDelete('cascade');
             $table->timestamps();
         });
     }
